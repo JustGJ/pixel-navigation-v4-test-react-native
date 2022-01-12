@@ -1,7 +1,9 @@
 import React from 'react';
-import { FlatList, Text, View, Image, Pressable } from 'react-native';
+import { FlatList, View } from 'react-native';
+import PressableItems from '../components/PressableItems';
 import { globalStyles } from '../styles/AppStyles';
-import Colors from '../styles/Colors';
+import MaterialIconsHeader from '../components/MaterialIconsHeader';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 const Home = ({ navigation }) => {
     const DATA = [
@@ -45,14 +47,12 @@ const Home = ({ navigation }) => {
 
     // const { item } = data
     const renderProfiles = ({ item }) => {
+        // Pour chaque item parcouru, on return un <Pressable>
+        // On passe en props handleNavigate afin d'nevoyer la navigation au composant enfant
         return (
-            <Pressable
-                style={({ pressed }) => [
-                    { backgroundColor: pressed ? Colors.clicked : Colors.white },
-                    globalStyles.profileItem,
-                ]}
-                // onPress={() => navigation.navigate('Portfolio', item)}
-                onPress={() =>
+            <PressableItems
+                item={item}
+                handleNavigate={() =>
                     navigation.navigate({
                         routeName: 'Portfolio',
                         params: {
@@ -62,17 +62,8 @@ const Home = ({ navigation }) => {
                             favColor: item.favColor,
                         },
                     })
-                }>
-                {/* Name  */}
-                <Text style={globalStyles.titleText}>{item.name}</Text>
-                {/* Image */}
-                <Image source={{ uri: item.img }} style={globalStyles.profileImg} />
-                {/* Infos */}
-                <View style={globalStyles.infoContainer}>
-                    <Text style={globalStyles.infos}>{item.country}</Text>
-                    <Text style={globalStyles.infos}>{item.totalImg}</Text>
-                </View>
-            </Pressable>
+                }
+            />
         );
     };
 
@@ -81,6 +72,14 @@ const Home = ({ navigation }) => {
             <FlatList data={DATA} keyExtractor={(item) => item.id} renderItem={renderProfiles} />
         </View>
     );
+};
+
+Home.navigationOptions = {
+    headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
+            <Item title="Menu" iconName="menu" onPress={() => alert('Afficher le menu latéral')} />
+        </HeaderButtons>
+    ),
 };
 
 export default Home;

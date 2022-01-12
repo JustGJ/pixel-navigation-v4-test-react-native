@@ -9,15 +9,15 @@ import Colors from '../styles/Colors';
 const screens = {
     Home: {
         screen: Home,
-        // navigationOptions: {
-        //     title: 'Accueil',
-        //     headerStyle: { backgroundColor: Colors.lightBrown },
-        // },
+        navigationOptions: {
+            title: 'Accueil',
+            //     headerStyle: { backgroundColor: Colors.lightBrown },
+        },
     },
     Portfolio: {
         screen: Portfolio,
         // navigationOptions: {
-        //     title: 'Profil',
+        // title: 'Profil',
         //     headerStyle: { backgroundColor: Colors.lightBrown },
         // },
     },
