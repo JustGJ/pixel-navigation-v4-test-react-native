@@ -1,5 +1,0 @@
-navigation.navigate('Photo'); navigate pour mettre Portfolio au dessus, et push pour rajouter une couche dans le stack
-navigation.replace('Photo'); On retire la pile Portfolio, que l'on remplace par Photo
-navigation.goBack(); retour vers la stack précédente (Portfolio)
-navigation.popToTop('Home'); // go to home. Home se place au dessus de la pile (le reste des autre stack a été enlevé)
-navigation.pop(); Alternative a goBack

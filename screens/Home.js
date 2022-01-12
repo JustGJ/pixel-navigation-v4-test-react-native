@@ -12,6 +12,7 @@ const Home = ({ navigation }) => {
             country: 'Allemagne',
             totalImg: 3,
             img: 'https://cdn.pixabay.com/photo/2017/12/17/08/44/girl-3023853_960_720.jpg',
+            favColor: 'blueviolet',
         },
         {
             id: '2',
@@ -20,6 +21,7 @@ const Home = ({ navigation }) => {
             country: 'France',
             totalImg: 5,
             img: 'https://cdn.pixabay.com/photo/2018/04/27/03/50/portrait-3353699_960_720.jpg',
+            favColor: 'firebrick',
         },
         {
             id: '3',
@@ -28,6 +30,7 @@ const Home = ({ navigation }) => {
             country: 'Espagne',
             totalImg: 4,
             img: 'https://cdn.pixabay.com/photo/2019/08/13/05/39/girl-4402542_960_720.jpg',
+            favColor: 'olive',
         },
         {
             id: '4',
@@ -36,6 +39,7 @@ const Home = ({ navigation }) => {
             country: 'Italie',
             totalImg: 5,
             img: 'https://cdn.pixabay.com/photo/2017/03/24/18/59/face-2171923_960_720.jpg',
+            favColor: 'orangered',
         },
     ];
 
@@ -47,7 +51,18 @@ const Home = ({ navigation }) => {
                     { backgroundColor: pressed ? Colors.clicked : Colors.white },
                     globalStyles.profileItem,
                 ]}
-                onPress={() => navigation.navigate('Portfolio', item)}>
+                // onPress={() => navigation.navigate('Portfolio', item)}
+                onPress={() =>
+                    navigation.navigate({
+                        routeName: 'Portfolio',
+                        params: {
+                            name: item.name,
+                            country: item.country,
+                            totalImg: item.totalImg,
+                            favColor: item.favColor,
+                        },
+                    })
+                }>
                 {/* Name  */}
                 <Text style={globalStyles.titleText}>{item.name}</Text>
                 {/* Image */}
