@@ -1,4 +1,3 @@
-import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/Home';
 import Portfolio from '../screens/Portfolio';
@@ -44,6 +43,6 @@ const defaultNavigationOptions = {
     },
 };
 
-const stackNav = createStackNavigator(screens, defaultNavigationOptions);
+const StackNav = createStackNavigator(screens, defaultNavigationOptions);
 
-export default createAppContainer(stackNav);
+export default StackNav;

@@ -1,6 +1,6 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
-import StackNav from './routes/HomeStackNav';
+import MainNavigator from './routes/DrawerNav';
 import {
     useFonts,
     InriaSans_300Light,
@@ -24,6 +24,6 @@ export default function App() {
     if (!fontsLoaded) {
         return <AppLoading />;
     } else {
-        return <StackNav />;
+        return <MainNavigator />;
     }
 }
