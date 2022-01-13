@@ -15,21 +15,13 @@ const screens = {
     },
     Portfolio: {
         screen: Portfolio,
-        // navigationOptions: {
-        // title: 'Profil',
-        //     headerStyle: { backgroundColor: Colors.lightBrown },
-        // },
     },
     Photo: {
         screen: Photo,
-        // navigationOptions: {
-        //     title: 'Profil',
-        //     headerStyle: { backgroundColor: Colors.lightBrown },
-        // },
     },
 };
 
-// Modifie le header des routes
+// Modifie le header des routes par défault
 const defaultNavigationOptions = {
     defaultNavigationOptions: {
         headerStyle: {
