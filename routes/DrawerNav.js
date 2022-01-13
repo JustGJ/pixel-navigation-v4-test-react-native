@@ -1,12 +1,12 @@
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
 import FaqStackNav from './FaqStackNav';
-import StackNav from './HomeStackNav';
 import Colors from '../styles/Colors';
+import BottomTabNav from './BottomTabNav';
 
 const RouteConfig = {
     Home: {
-        screen: StackNav,
+        screen: BottomTabNav,
         navigationOptions: {
             drawerLabel: 'Accueil', // Nom de l'onglet
         },
@@ -31,7 +31,7 @@ const DrawerNavigatorConfig = {
         inactiveTintColor: Colors.white,
         activeTintColor: Colors.clicked,
     },
-    drawerBackgroundColor: '#333', // color drawer
+    drawerBackgroundColor: Colors.darkGrey,
 };
 
 // Création des onglets de notre menu

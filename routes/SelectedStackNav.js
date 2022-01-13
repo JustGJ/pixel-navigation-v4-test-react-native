@@ -1,29 +1,25 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import Home from '../screens/Home';
-import Portfolio from '../screens/Portfolio';
 import Photo from '../screens/Photo';
 import Colors from '../styles/Colors';
+import Selected from '../screens/Selected';
+import { Platform } from 'react-native';
 
 // Nos différents routes/écrans à afficher
 const screens = {
-    Home: {
-        screen: Home,
+    Selected: {
+        screen: Selected,
         navigationOptions: {
-            title: 'Accueil',
-            // headerStyle: { backgroundColor: Colors.lightBrown },
+            title: 'FAVORIS',
         },
     },
     Portfolio: {
-        screen: Portfolio,
+        screen: Photo,
         navigationOptions: {
-            title: 'Profil',
+            title: 'PHOTO',
         },
     },
     Photo: {
         screen: Photo,
-        navigationOptions: {
-            title: 'Photo',
-        },
     },
 };
 
@@ -31,7 +27,7 @@ const screens = {
 const defaultNavigationOptions = {
     defaultNavigationOptions: {
         headerStyle: {
-            backgroundColor: Colors.lightBrown,
+            backgroundColor: Platform.OS === 'ios' ? Colors.lightBrown : Colors.darkGrey,
         },
         headerTintColor: Colors.white,
         headerTitleStyle: {
@@ -41,6 +37,6 @@ const defaultNavigationOptions = {
     },
 };
 
-const StackNav = createStackNavigator(screens, defaultNavigationOptions);
+const SelectedStackNav = createStackNavigator(screens, defaultNavigationOptions);
 
-export default StackNav;
+export default SelectedStackNav;
