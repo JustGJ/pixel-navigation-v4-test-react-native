@@ -3,4 +3,5 @@ export default {
     clicked: 'palevioletred',
     lightBrown: 'salmon',
     darkGrey: '#333',
+    ghost: 'ghostwhite',
 };

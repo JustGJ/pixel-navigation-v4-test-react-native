@@ -5,7 +5,7 @@ const Photo = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Photo</Text>
-            <Button title="Vers Home" onPress={handlePress} />
+            <Button title="Vers Home" />
         </View>
     );
 };
