@@ -1,18 +1,50 @@
-import React from 'react';
-import { Text, View, ScrollView, StyleSheet, Image } from 'react-native';
+import React, { useCallback, useEffect } from 'react';
+import { Text, View, ScrollView, StyleSheet, Image, Alert } from 'react-native';
 import { globalStyles } from '../styles/AppStyles';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelection } from '../redux/actions/selection.action';
 import MaterialIconsHeader from '../components/MaterialIconsHeader';
 import Colors from '../styles/Colors';
 import TouchableImg from '../components/TouchableImg';
 
 const Portfolio = ({ navigation }) => {
+    const userId = navigation.getParam('id');
     const favColor = navigation.getParam('favColor');
     const name = navigation.getParam('name');
     const profileImg = navigation.getParam('img');
     const description = navigation.getParam('desc');
     const photoArray = navigation.getParam('photos');
 
+    // Vérifie si l'user a été selectionné
+    const selectedUser = useSelector((state) =>
+        state.users.selectedUsers.some((user) => user.id === userId)
+    );
+    const dispatch = useDispatch();
+
+    // add to selection
+    const handleDispatch = useCallback(() => {
+        dispatch(setSelection(userId));
+        if (selectedUser) {
+            Alert.alert('Photos effacées', `Les photos de ${name} sont effacées`, [{ text: 'Ok' }]);
+        } else {
+            Alert.alert('Photos enregistrées', 'Elles sont disponibles dans votre sélection', [
+                { text: 'Ok' },
+            ]);
+        }
+    }, [dispatch, userId, selectedUser]);
+
+    // Pour qu'on le header puisse avoir accès à notre fonction handleDispatch, il faut créer un nouveau param afin de le récupérer avec un get.
+    useEffect(() => {
+        navigation.setParams({ handleLike: handleDispatch });
+    }, [handleDispatch]);
+
+    // Pour qu'on le header puisse avoir accès à isSeelcted, il faut créer un nouveau param afin de le récupérer avec un get.
+    useEffect(() => {
+        navigation.setParams({ isSelected: selectedUser });
+    }, [selectedUser]);
+
+    // Go to the photo
     const selectPhoto = (photo) => {
         navigation.navigate('Photo', photo);
     };
@@ -45,6 +77,8 @@ const Portfolio = ({ navigation }) => {
 Portfolio.navigationOptions = (navigationData) => {
     const name = navigationData.navigation.getParam('name');
     const favColor = navigationData.navigation.getParam('favColor');
+    const handleLike = navigationData.navigation.getParam('handleLike'); // Notre param qui possède la fonction d'ajout, crée au montage du composant
+    const isSelected = navigationData.navigation.getParam('isSelected');
 
     return {
         headerTitle: `Profil de ${name}`,
@@ -56,14 +90,9 @@ Portfolio.navigationOptions = (navigationData) => {
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
                 <Item
-                    title="info"
-                    iconName="info-outline"
-                    onPress={() => alert('Portfolio de ' + name)}
-                />
-                <Item
-                    title="infoTwo"
-                    iconName="info"
-                    onPress={() => alert('Portfolio de ' + name)}
+                    title="Ajouter"
+                    iconName={isSelected ? 'delete' : 'thumb-up'}
+                    onPress={handleLike}
                 />
             </HeaderButtons>
         ),
